@@ -62,7 +62,7 @@ class Coc:
 
     # print(loadlist())
 
-    def createKey(self):
+    def createKey(self, ip=None):
         cookie = self.login()
         url = 'https://developer.clashofclans.com/api/apikey/create'
         headers = {
@@ -84,7 +84,7 @@ class Coc:
         randomdata = ''.join(
             [random.choice(string.ascii_letters + string.digits) for n in range(12)])
         data = {"name": randomdata, "description": randomdata,
-                "cidrRanges": [self.getmyip()], "scopes": None}
+                "cidrRanges": [ip if ip else self.getmyip()], "scopes": None}
         response = requests.post(url, headers=headers, data=json.dumps(data))
         return response.json()
 
